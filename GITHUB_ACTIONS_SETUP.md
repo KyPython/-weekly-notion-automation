@@ -12,17 +12,23 @@ Go to your repository: https://github.com/KyPython/-weekly-notion-automation
 2. Click **New repository secret**
 3. Add these secrets:
 
-#### Required Secrets:
+#### Required Secret:
 
-**`NOTION_API_KEY`**
+**`NOTION_API_KEY`** ⚠️ REQUIRED
 - Value: Your Notion API key (starts with `ntn_`)
 - Same key you use for your daily metrics automation
 
-**`EASYFLOW_DAILY_METRICS_DB_ID`** (Optional - defaults are set in code)
-- Value: `373f0ed0-4d5b-4e8a-9e90-9bc8d7b5a16a`
+#### Optional Secrets (Defaults are already set in code):
 
-**`WEEKLY_SUCCESS_CRITERIA_DB_ID`** (Optional - defaults are set in code)
+**`EASYFLOW_DAILY_METRICS_DB_ID`** (Optional)
+- Value: `373f0ed0-4d5b-4e8a-9e90-9bc8d7b5a16a`
+- Only add this if your database ID is different
+
+**`WEEKLY_SUCCESS_CRITERIA_DB_ID`** (Optional)
 - Value: `9e04bcc9-471d-4372-9e0f-5f0a9111e87b`
+- Only add this if your database ID is different
+
+**Note:** You only need to add `NOTION_API_KEY`. The database IDs have defaults built into the script.
 
 ### 2. Adjust Schedule Time
 
