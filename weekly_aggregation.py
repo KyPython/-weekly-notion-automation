@@ -33,9 +33,9 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-# Database IDs
-EASYFLOW_DAILY_METRICS_DB_ID = os.getenv('EASYFLOW_DAILY_METRICS_DB_ID', '373f0ed0-4d5b-4e8a-9e90-9bc8d7b5a16a')
-WEEKLY_SUCCESS_CRITERIA_DB_ID = os.getenv('WEEKLY_SUCCESS_CRITERIA_DB_ID', '9e04bcc9-471d-4372-9e0f-5f0a9111e87b')
+# Database IDs (use defaults if env vars are not set or empty)
+EASYFLOW_DAILY_METRICS_DB_ID = os.getenv('EASYFLOW_DAILY_METRICS_DB_ID') or '373f0ed0-4d5b-4e8a-9e90-9bc8d7b5a16a'
+WEEKLY_SUCCESS_CRITERIA_DB_ID = os.getenv('WEEKLY_SUCCESS_CRITERIA_DB_ID') or '9e04bcc9-471d-4372-9e0f-5f0a9111e87b'
 
 # Field IDs for EasyFlow Daily Metrics
 DAILY_METRICS_FIELDS = {

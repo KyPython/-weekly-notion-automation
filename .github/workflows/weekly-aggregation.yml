@@ -30,8 +30,10 @@ jobs:
     - name: Run weekly aggregation
       env:
         NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
-        EASYFLOW_DAILY_METRICS_DB_ID: ${{ secrets.EASYFLOW_DAILY_METRICS_DB_ID }}
-        WEEKLY_SUCCESS_CRITERIA_DB_ID: ${{ secrets.WEEKLY_SUCCESS_CRITERIA_DB_ID }}
+        # Database IDs are optional - defaults are set in the script
+        # Only set these if you want to override the defaults
+        EASYFLOW_DAILY_METRICS_DB_ID: ${{ secrets.EASYFLOW_DAILY_METRICS_DB_ID || '' }}
+        WEEKLY_SUCCESS_CRITERIA_DB_ID: ${{ secrets.WEEKLY_SUCCESS_CRITERIA_DB_ID || '' }}
       run: |
         python weekly_aggregation.py
     
