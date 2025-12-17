@@ -1,0 +1,45 @@
+name: Weekly Notion Aggregation
+
+on:
+  schedule:
+    # Run every Friday at 8:00 AM UTC (adjust timezone as needed)
+    # For 8 AM EST: Use "0 13 * * 5" (1 PM UTC)
+    # For 8 AM PST: Use "0 16 * * 5" (4 PM UTC)
+    # For 8 AM local time, adjust the hour accordingly
+    - cron: '0 13 * * 5'  # Friday at 1 PM UTC (8 AM EST)
+  workflow_dispatch:  # Allows manual triggering from GitHub UI
+
+jobs:
+  aggregate-weekly-metrics:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Run weekly aggregation
+      env:
+        NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+        EASYFLOW_DAILY_METRICS_DB_ID: ${{ secrets.EASYFLOW_DAILY_METRICS_DB_ID }}
+        WEEKLY_SUCCESS_CRITERIA_DB_ID: ${{ secrets.WEEKLY_SUCCESS_CRITERIA_DB_ID }}
+      run: |
+        python weekly_aggregation.py
+    
+    - name: Upload logs on failure
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: aggregation-logs
+        path: logs/
+        retention-days: 7
+
